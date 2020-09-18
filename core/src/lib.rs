@@ -32,6 +32,9 @@ pub enum Error {
 
 pub type Result<T> = core::result::Result<T, Error>;
 
+const OPS_PER_KEY: u32 = 100;
+const OPS_ERROR_LIMIT: u32 = 100_000;
+
 impl Default for Demon {
     fn default() -> Self {
         Demon {
@@ -40,8 +43,8 @@ impl Default for Demon {
             last_mixing_sample: 0,
             mix: 0xF0F0F0F0,
             run: 0,
-            ops_remaining: 100,
-            samples_remaining: 100_000,
+            ops_remaining: OPS_PER_KEY,
+            samples_remaining: OPS_ERROR_LIMIT,
         }
     }
 }
@@ -107,11 +110,10 @@ impl Demon {
             }
         }
 
-
         if self.ops_remaining == 0 {
             // reset counters to gather more entropy before returning next key
-            self.ops_remaining = 100;
-            self.samples_remaining = 100_000;
+            self.ops_remaining = OPS_PER_KEY;
+            self.samples_remaining = OPS_ERROR_LIMIT;
             Ok(self.key.to_ne_bytes())
         } else if self.samples_remaining == 0 {
             Err(Error::Timeout)

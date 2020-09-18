@@ -109,6 +109,9 @@ impl Demon {
 
 
         if self.ops_remaining == 0 {
+            // reset counters to gather more entropy before returning next key
+            self.ops_remaining = 100;
+            self.samples_remaining = 100_000;
             Ok(self.key.to_ne_bytes())
         } else if self.samples_remaining == 0 {
             Err(Error::Timeout)

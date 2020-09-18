@@ -1,6 +1,6 @@
 [package]
 name = "maxwell"
-version = "0.1.0"
+version = "0.1.1"
 description = "A crate for gathering entropy from unreliable sources"
 repository = "https://github.com/jamesmunns/maxwell"
 authors = ["James Munns <james.munns@ferrous-systems.com>"]

@@ -1,0 +1,10 @@
+[package]
+name = "maxwell"
+version = "0.1.0"
+description = "A crate for gathering entropy from unreliable sources"
+repository = "https://github.com/jamesmunns/maxwell"
+authors = ["James Munns <james.munns@ferrous-systems.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+license = "MIT OR Apache-2.0"
